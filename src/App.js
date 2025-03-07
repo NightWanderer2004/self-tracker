@@ -17,6 +17,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 function App() {
    // State variables
    const [entries, setEntries] = useState([])
+   const [fileContent, setFileContent] = useState('')
    const [isFileUploaded, setIsFileUploaded] = useState(false)
    const [correlationData, setCorrelationData] = useState(null)
    const [categories, setCategories] = useState([])
@@ -32,7 +33,8 @@ function App() {
    }
 
    // Handle data after file is loaded
-   const handleDataLoaded = parsedEntries => {
+   const handleDataLoaded = (content, parsedEntries) => {
+      setFileContent(content)
       setEntries(parsedEntries)
       setIsFileUploaded(true)
    }
