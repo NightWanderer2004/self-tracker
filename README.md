@@ -35,4 +35,4 @@
 
 Запуск через `npm install` и `npm start`
 
-Или же онлайн-версия: [трекинг себя](https://self-tracker-two.vercel.app)
+Или же онлайн-версия: [трекинг себя](https://tracking-self.vercel.app)
