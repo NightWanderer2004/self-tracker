@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js'
-import { marked } from 'marked'
 
 // Import components
 import FileUploader from './components/FileUploader'
@@ -18,7 +17,6 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 function App() {
    // State variables
    const [entries, setEntries] = useState([])
-   const [fileContent, setFileContent] = useState('')
    const [isFileUploaded, setIsFileUploaded] = useState(false)
    const [correlationData, setCorrelationData] = useState(null)
    const [categories, setCategories] = useState([])
@@ -34,8 +32,7 @@ function App() {
    }
 
    // Handle data after file is loaded
-   const handleDataLoaded = (content, parsedEntries) => {
-      setFileContent(content)
+   const handleDataLoaded = parsedEntries => {
       setEntries(parsedEntries)
       setIsFileUploaded(true)
    }
