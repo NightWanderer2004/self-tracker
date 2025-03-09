@@ -22,6 +22,7 @@ function App() {
    const [correlationData, setCorrelationData] = useState(null)
    const [categories, setCategories] = useState([])
    const [timeSeriesData, setTimeSeriesData] = useState(null)
+   const [isDarkMode, setIsDarkMode] = useState(false)
 
    // Container style
    const containerStyle = {
@@ -39,6 +40,36 @@ function App() {
       setIsFileUploaded(true)
    }
 
+   // Check system preference for dark mode on initial load
+   useEffect(() => {
+      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+      setIsDarkMode(prefersDarkMode)
+
+      if (prefersDarkMode) {
+         document.body.classList.add('dark-theme')
+      } else {
+         document.body.classList.remove('dark-theme')
+      }
+
+      // Listen for changes in system preference
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      const handleChange = e => {
+         setIsDarkMode(e.matches)
+         if (e.matches) {
+            document.body.classList.add('dark-theme')
+         } else {
+            document.body.classList.remove('dark-theme')
+         }
+      }
+
+      mediaQuery.addEventListener('change', handleChange)
+
+      // Cleanup listener on component unmount
+      return () => {
+         mediaQuery.removeEventListener('change', handleChange)
+      }
+   }, [])
+
    // Process data for visualizations when entries change
    useEffect(() => {
       if (entries.length > 0) {
@@ -47,7 +78,8 @@ function App() {
          setCategories(uniqueCategories)
 
          // Prepare time series data with custom color generator
-         const colorGenerator = index => generatePastelColor(index, 0.7, 30)
+         // Keep using the original blue accent colors regardless of theme
+         const colorGenerator = index => generatePastelColor(index, 0.7, 30, false)
          const timeData = prepareTimeSeriesData(entries, uniqueCategories, colorGenerator)
          setTimeSeriesData(timeData)
 
@@ -61,7 +93,8 @@ function App() {
       <div style={containerStyle}>
          <div style={{ marginBottom: '52px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <h1 style={{ fontSize: '28px', margin: '0' }}>
-               <span style={{ opacity: 0.5 }}>[</span>Трекинг себя<span style={{ opacity: 0.5 }}>]</span>
+               <span style={{ opacity: isDarkMode ? 1 : 0.5, color: isDarkMode ? 'rgba(79, 123, 152, 1)' : '' }}>[</span>Трекинг себя
+               <span style={{ opacity: isDarkMode ? 1 : 0.5, color: isDarkMode ? 'rgba(79, 123, 152, 1)' : '' }}>]</span>
             </h1>
             <FileUploader onDataLoaded={handleDataLoaded} />
          </div>
@@ -70,7 +103,7 @@ function App() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                {timeSeriesData && <TimeSeriesChart timeSeriesData={timeSeriesData} />}
                {correlationData && <CorrelationMatrix correlationData={correlationData} categories={categories} />}
-               <DailyScores entries={entries} />
+               {entries.length > 0 && <DailyScores entries={entries} />}
             </div>
          )}
       </div>

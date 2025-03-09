@@ -1,18 +1,20 @@
 /**
  * Generates a color based on a score value using shades of rgba(79, 123, 152, 1)
+ * The isDarkMode parameter is kept for compatibility but not used to change the base color
  * @param {number} score - The score value (typically 0-10)
  * @param {number} opacity - Color opacity (0-1)
  * @param {number} lightness - Lightness adjustment (-100 to 100)
+ * @param {boolean} isDarkMode - Whether dark mode is active (not used for base color)
  * @returns {string} - RGBA color string
  */
-export const generateColor = (score, opacity = 0.8, lightness = 0) => {
+export const generateColor = (score, opacity = 0.8, lightness = 0, isDarkMode = false) => {
    // Normalize score to 0-1 range (assuming score is 0-10)
    const normalizedScore = Math.min(Math.max(score / 10, 0), 1)
 
    // Adjust lightness based on score (higher score = lighter color)
    const lightnessAdjustment = lightness + normalizedScore * 40
 
-   // Base color components
+   // Base color components - always use the blue accent color
    let r = 79
    let g = 123
    let b = 152
@@ -36,14 +38,16 @@ export const generateColor = (score, opacity = 0.8, lightness = 0) => {
 }
 
 /**
- * Generates diverse colors based on index, all in the rgba(79, 123, 152, 1) family
+ * Generates diverse colors based on index
+ * The isDarkMode parameter is kept for compatibility but not used to change the base color
  * @param {number} index - The index to generate color for
  * @param {number} opacity - Color opacity (0-1)
  * @param {number} saturationVariation - How much to vary the saturation (0-100)
+ * @param {boolean} isDarkMode - Whether dark mode is active (not used for base color)
  * @returns {string} - RGBA color string
  */
-export const generatePastelColor = (index, opacity = 0.8, saturationVariation = 20) => {
-   // Base color components
+export const generatePastelColor = (index, opacity = 0.8, saturationVariation = 20, isDarkMode = false) => {
+   // Base color components - always use the blue accent color
    const r = 79
    const g = 123
    const b = 152
@@ -60,22 +64,29 @@ export const generatePastelColor = (index, opacity = 0.8, saturationVariation = 
 }
 
 /**
- * Generates a correlation cell background color using shades of rgba(79, 123, 152, 1)
+ * Generates a correlation cell background color
+ * The isDarkMode parameter is kept for compatibility but not used to change the base color
  * @param {number|string} value - Correlation value or '-' for no data
+ * @param {boolean} isDarkMode - Whether dark mode is active (not used for base color)
  * @returns {string} - RGBA color string
  */
-export const getCorrelationColor = value => {
+export const getCorrelationColor = (value, isDarkMode = false) => {
+   // Base color components - always use the blue accent color
+   const r = 79
+   const g = 123
+   const b = 152
+
    if (value === '-') {
       // No data - very light shade
-      return 'rgba(79, 123, 152, 0.1)'
+      return `rgba(${r}, ${g}, ${b}, 0.1)`
    } else if (value === 1) {
       // Self-correlation (diagonal) - medium shade
-      return 'rgba(79, 123, 152, 0.3)'
+      return `rgba(${r}, ${g}, ${b}, 0.3)`
    } else if (value > 0) {
       // Positive correlation - darker with higher correlation
-      return generateColor(value, value * 0.8, 35)
+      return generateColor(value, value * 0.8, 35, false)
    } else {
       // Negative correlation - lighter shade with lower opacity
-      return generateColor(value, value * 0.8, -35)
+      return generateColor(value, value * 0.8, -35, false)
    }
 }

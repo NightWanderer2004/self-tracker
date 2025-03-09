@@ -3,8 +3,21 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="theme-color" content="#fcfcf9" />
+      <meta name="theme-color" content="#fcfcf9" id="theme-color-meta" />
       <title>[Трекинг себя]</title>
+      <script>
+         // Update theme-color meta tag based on system preference
+         function updateThemeColor() {
+            const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+            document.getElementById('theme-color-meta').setAttribute('content', isDarkMode ? '#191A1A' : '#fcfcf9')
+         }
+
+         // Initial check
+         window.addEventListener('DOMContentLoaded', updateThemeColor)
+
+         // Listen for changes
+         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateThemeColor)
+      </script>
    </head>
    <body>
       <div id="root"></div>
