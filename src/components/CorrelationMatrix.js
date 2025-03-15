@@ -22,7 +22,7 @@ const CorrelationMatrix = ({ correlationData, categories }) => {
    const borderColor = isDarkMode ? 'rgba(252, 252, 249, 0.2)' : 'rgba(79, 123, 152, 0.2)'
 
    return (
-      <div style={{ marginBottom: '2rem' }}>
+      <div style={{ marginBottom: '2rem', fontWeight: 'bold' }}>
          <h3 style={{ fontSize: '22px' }}>Корреляционная матрица</h3>
          <div style={{ overflowX: 'auto' }}>
             <table style={{ borderCollapse: 'collapse', margin: '0', width: '100%', fontSize: '16px' }}>
@@ -39,7 +39,7 @@ const CorrelationMatrix = ({ correlationData, categories }) => {
                <tbody>
                   {categories.map(cat1 => (
                      <tr key={cat1}>
-                        <td style={{ padding: '10px', border: `1.5px solid ${borderColor}`, fontWeight: 'bold', color: textColor }}>{cat1}</td>
+                        <td style={{ padding: '10px', border: `1.5px solid ${borderColor}`, color: textColor }}>{cat1}</td>
                         {categories.map(cat2 => {
                            const value = correlationData[cat1][cat2]
                            // Keep using blue accent colors for cells (isDarkMode = false)
@@ -54,7 +54,7 @@ const CorrelationMatrix = ({ correlationData, categories }) => {
                                     border: `1.5px solid ${borderColor}`,
                                     backgroundColor: backgroundColor,
                                     textAlign: 'center',
-                                    fontWeight: 'bold',
+
                                     fontSize: value === 1.0 ? '28px' : 'inherit',
                                     color: cellTextColor,
                                  }}

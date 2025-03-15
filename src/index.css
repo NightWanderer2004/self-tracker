@@ -5,15 +5,23 @@
    --text-dark: #e8e8e6;
 }
 
+@font-face {
+   font-family: 'Departure Mono';
+   src: url('/public/font/DepartureMono-Regular.woff2') format('woff2');
+   font-weight: normal;
+   font-style: normal;
+   font-display: swap;
+}
+
 body {
    background: var(--bg-light);
    color: var(--text-light);
    margin: 0;
-   font-family: 'monospace';
+   font-family: 'Departure Mono', monospace;
    -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Dark theme based on system preference */
 @media (prefers-color-scheme: dark) {
    body {
       background: var(--bg-dark);
@@ -21,13 +29,7 @@ body {
    }
 }
 
-/* Class-based theme toggle */
 body.dark-theme {
    background: var(--bg-dark);
    color: var(--text-dark);
-}
-
-/* Smooth transition between themes */
-body {
-   transition: background-color 0.3s ease, color 0.3s ease;
 }

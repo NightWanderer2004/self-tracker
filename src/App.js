@@ -29,7 +29,6 @@ function App() {
       maxWidth: '925px',
       margin: '0 auto',
       padding: '44px 16px',
-      fontFamily: 'monospace',
       fontSize: '16px',
    }
 

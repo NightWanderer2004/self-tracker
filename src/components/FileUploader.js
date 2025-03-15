@@ -49,9 +49,9 @@ const FileUploader = ({ onDataLoaded }) => {
                   border: 'none',
                   padding: '7px 14px',
                   fontSize: '16px',
+                  fontFamily: 'Departure Mono',
                   fontWeight: 'bold',
                   cursor: 'pointer',
-                  fontFamily: 'monospace',
                }}
                onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3a5e70')}
                onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4f7b98')}
@@ -62,7 +62,6 @@ const FileUploader = ({ onDataLoaded }) => {
                style={{
                   fontSize: '16px',
                   color: '#4f7b98',
-                  fontFamily: 'monospace',
                   border: '1.5px solid rgba(79, 123, 152, 0.1)',
                   padding: '8px 12px',
                   backgroundColor: 'rgba(79, 123, 152, 0.05)',

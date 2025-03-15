@@ -24,22 +24,23 @@ const TimeSeriesChart = ({ timeSeriesData }) => {
    // Keep grid color subtle in both modes
    const gridColor = isDarkMode ? 'rgba(252, 252, 249, 0.15)' : 'rgba(79, 123, 152, 0.15)'
 
-   // We don't modify the dataset colors - they remain in the accent blue color
-
    const chartOptions = {
       responsive: true,
       maintainAspectRatio: false,
+      font: {
+         family: 'Departure Mono',
+         weight: 'bold',
+      },
       scales: {
          y: {
             beginAtZero: true,
             grid: {
                color: gridColor,
-               lineWidth: 1.5,
+               lineWidth: 1.75,
             },
             ticks: {
                font: {
                   size: 14,
-                  family: 'monospace',
                },
                color: textColor,
             },
@@ -47,12 +48,11 @@ const TimeSeriesChart = ({ timeSeriesData }) => {
          x: {
             grid: {
                color: gridColor,
-               lineWidth: 1.5,
+               lineWidth: 1.75,
             },
             ticks: {
                font: {
                   size: 14,
-                  family: 'monospace',
                },
                color: textColor,
             },
@@ -60,11 +60,14 @@ const TimeSeriesChart = ({ timeSeriesData }) => {
       },
       plugins: {
          legend: {
+            font: {
+               family: 'Departure Mono',
+               weight: 'bold',
+            },
             position: 'bottom',
             labels: {
                font: {
                   size: 14,
-                  family: 'monospace',
                },
                color: textColorSolid,
                padding: 15,
@@ -73,18 +76,24 @@ const TimeSeriesChart = ({ timeSeriesData }) => {
          tooltip: {
             bodyFont: {
                size: 14,
-               family: 'monospace',
+               weight: 'bold',
+               family: 'Departure Mono',
             },
             titleFont: {
                size: 16,
-               family: 'monospace',
+               family: 'Departure Mono',
             },
             backgroundColor: 'rgba(79, 123, 152, 0.8)',
             titleColor: 'white',
             bodyColor: 'white',
             borderColor: 'rgba(79, 123, 152, 0.2)',
-            borderWidth: 1,
+            borderWidth: 2,
             padding: 10,
+         },
+      },
+      elements: {
+         point: {
+            pointStyle: 'rect',
          },
       },
    }
