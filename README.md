@@ -4,7 +4,7 @@
 
 > _«То, что измеримо, то и управляемо.»_
 
-![Tracking Self Interface](./public/tracking-self.png)
+![Tracking Self Interface](./public/tracking-self.spng)
 
 ## Основные функции
 
