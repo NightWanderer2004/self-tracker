@@ -35,7 +35,7 @@ function App() {
 
   // Container style
   const containerStyle = {
-    maxWidth: '925px',
+    maxWidth: '725px',
     margin: '0 auto',
     padding: '44px 16px',
     fontSize: '16px',
